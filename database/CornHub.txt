@@ -1,0 +1,60 @@
+CREATE DATABASE CornHub;
+USE CornHub;
+CREATE TABLE Movies (
+    movie_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    release_year INT,
+    duration INT,
+    Nation VARCHAR(50),
+    image_url VARCHAR(255),
+    trailer_url VARCHAR(255),
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE Genres (
+    genre_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+CREATE TABLE Movies_Genres (
+    movie_id INT,
+    genre_id INT,
+    PRIMARY KEY (movie_id, genre_id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id),
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
+);
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255),
+    profile_picture VARCHAR(255),
+    date_joined DATETIME DEFAULT CURRENT_TIMESTAMP,
+    last_login DATETIME
+);
+CREATE TABLE Ratings (
+    rating_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    movie_id INT,
+    rating INT CHECK (rating >= 1 AND rating <= 10),
+    date_rated DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+);
+CREATE TABLE Watch_History (
+    watch_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    movie_id INT,
+    watch_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+);
+CREATE TABLE Comments (
+    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    movie_id INT,
+    comment TEXT,
+    date_commented DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+);
