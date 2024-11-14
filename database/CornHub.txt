@@ -7,21 +7,21 @@ CREATE TABLE Movies (
     description TEXT,
     release_year INT,
     duration INT,
-    Nation VARCHAR(50),
+    nation VARCHAR(50),
     image_url VARCHAR(255),
     trailer_url VARCHAR(255),
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE Genres (
     genre_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+    name VARCHAR(100) NOT NULL UNIQUE
 );
 CREATE TABLE Movies_Genres (
     movie_id INT,
     genre_id INT,
     PRIMARY KEY (movie_id, genre_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id),
-    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE,
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id) ON DELETE CASCADE
 );
 CREATE TABLE Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,25 +30,24 @@ CREATE TABLE Users (
     password VARCHAR(255) NOT NULL,
     full_name VARCHAR(255),
     profile_picture VARCHAR(255),
-    date_joined DATETIME DEFAULT CURRENT_TIMESTAMP,
-    last_login DATETIME
+    date_joined DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE Ratings (
-    rating_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     movie_id INT,
     rating INT CHECK (rating >= 1 AND rating <= 10),
     date_rated DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+    PRIMARY KEY (user_id, movie_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
 );
 CREATE TABLE Watch_History (
     watch_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     movie_id INT,
     watch_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
 );
 CREATE TABLE Comments (
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,127 +55,98 @@ CREATE TABLE Comments (
     movie_id INT,
     comment TEXT,
     date_commented DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
 );
-INSERT INTO Genres (name) VALUES
+CREATE TABLE SubMovies (
+    submovie_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    submovie_title VARCHAR(255) NOT NULL,
+    submovie_description TEXT,
+    release_year INT,
+    duration INT,
+    image_url VARCHAR(255),
+    trailer_url VARCHAR(255),
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
+);
+CREATE TABLE Episodes (
+    episode_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    season INT,
+    episode_number INT,
+    episode_title VARCHAR(255) NOT NULL,
+    episode_description TEXT,
+    release_date DATE,
+    duration INT,
+    image_url VARCHAR(255),
+    trailer_url VARCHAR(255),
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
+);
+INSERT INTO Movies (title, description, release_year, duration, nation, image_url, trailer_url) VALUES 
+('Naruto', 'Naruto Uzumaki, a young ninja with a dream to become the strongest ninja and lead his village.', 2002, 220, 'Japan', 'naruto.jpg', 'https://youtube.com/trailer/naruto'),
+('Attack on Titan', 'Humanity fights for survival against gigantic humanoid creatures known as Titans.', 2013, 25, 'Japan', 'aot.jpg', 'https://youtube.com/trailer/aot'),
+('One Piece', 'Monkey D. Luffy and his pirate crew explore the Grand Line in search of the greatest treasure ever left by the legendary Pirate, Gold Roger.', 1999, 24, 'Japan', 'onepiece.jpg', 'https://youtube.com/trailer/onepiece'),
+('Demon Slayer', 'Tanjiro Kamado becomes a demon slayer to avenge his family and cure his sister Nezuko, who was turned into a demon.', 2019, 23, 'Japan', 'demonslayer.jpg', 'https://youtube.com/trailer/demonslayer'),
+('Fullmetal Alchemist: Brotherhood', 'Two brothers search for a Philosopher’s Stone after an attempt to revive their mother goes awry and leaves them in damaged physical forms.', 2009, 24, 'Japan', 'fullmetal.jpg', 'https://youtube.com/trailer/fullmetal'),
+('My Hero Academia', 'In a world where almost every human has powers, a young boy without powers still dreams of becoming the greatest hero.', 2016, 23, 'Japan', 'mha.jpg', 'https://youtube.com/trailer/mha'),
+('Dragon Ball Z', 'Goku and his companions battle alien foes, androids, and extraterrestrial threats to save the Earth.', 1989, 24, 'Japan', 'dbz.jpg', 'https://youtube.com/trailer/dbz'),
+('One Punch Man', 'Saitama, a man who can defeat anyone with one punch, struggles to find a worthy opponent and battles monsters to protect humanity.', 2015, 12, 'Japan', 'onepunchman.jpg', 'https://youtube.com/trailer/onepunchman'),
+('Sword Art Online', 'Players of a virtual reality MMORPG become trapped in the game, and the only way out is to clear the game.', 2012, 22, 'Japan', 'sao.jpg', 'https://youtube.com/trailer/sao'),
+('Tokyo Ghoul', 'Ken Kaneki, a college student, becomes a half-ghoul after a near-fatal accident and must survive in a world full of ghoul-human conflicts.', 2014, 24, 'Japan', 'tokyoghoul.jpg', 'https://youtube.com/trailer/tokyoghoul'),
+('Death Note', 'A high school student discovers a mysterious notebook that grants him the power to kill anyone whose name he writes in it.', 2006, 23, 'Japan', 'deathnote.jpg', 'https://youtube.com/trailer/deathnote'),
+('Neon Genesis Evangelion', 'Teenagers must pilot giant mechs to protect Earth from mysterious beings called Angels.', 1995, 24, 'Japan', 'evangelion.jpg', 'https://youtube.com/trailer/evangelion'),
+('Bleach', 'Ichigo Kurosaki, a teenager with the ability to see ghosts, must fight evil spirits known as Hollows and protect the living.', 2004, 23, 'Japan', 'bleach.jpg', 'https://youtube.com/trailer/bleach'),
+('Attack on Titan', 'Humanity fights for survival against gigantic humanoid creatures known as Titans.', 2013, 25, 'Japan', 'aot.jpg', 'https://youtube.com/trailer/aot'),
+('Hunter x Hunter', 'A young boy named Gon Freecss embarks on an adventure to find his father, who was an infamous Hunter.', 2011, 24, 'Japan', 'hunterxhunter.jpg', 'https://youtube.com/trailer/hunterxhunter'),
+('Fairy Tail', 'A young girl, Lucy, joins a powerful wizard guild, Fairy Tail, and teams up with Natsu and his dragon Igneel.', 2009, 24, 'Japan', 'fairytail.jpg', 'https://youtube.com/trailer/fairytail'),
+('Cowboy Bebop', 'In the year 2071, a group of bounty hunters embark on various missions across the galaxy in their spaceship called the Bebop.', 1998, 26, 'Japan', 'cowboybebop.jpg', 'https://youtube.com/trailer/cowboybebop'),
+('Akira', 'In a dystopian future, a gang of motorcycle rebels uncover the terrifying secret of a government project involving psychic powers.', 1988, 120, 'Japan', 'akira.jpg', 'https://youtube.com/trailer/akira'),
+('Your Name', 'Two teenagers, a boy and a girl, find themselves mysteriously connected by a strange supernatural occurrence.', 2016, 106, 'Japan', 'yourname.jpg', 'https://youtube.com/trailer/yourname'),
+('Spirited Away', 'A young girl is trapped in a mysterious world of spirits and must find a way to save her parents and return home.', 2001, 125, 'Japan', 'spiritedaway.jpg', 'https://youtube.com/trailer/spiritedaway'),
+('Princess Mononoke', 'A young warrior embarks on a journey to the forest of the gods to resolve a conflict between humans and nature spirits.', 1997, 134, 'Japan', 'princessmononoke.jpg', 'https://youtube.com/trailer/princessmononoke');
+INSERT INTO Genres (name) 
+VALUES
 ('Action'),
 ('Adventure'),
 ('Fantasy'),
 ('Drama'),
-('Horror'),
-('Sci-Fi'),
-('Romance'),
-('Mystery'),
-('Comedy'),
-('Thriller'),
+('Shounen'),
 ('Supernatural'),
-('Psychological'),
-('Mecha'),
-('Slice of Life');
-INSERT INTO Movies (title, description, release_year, duration, Nation, image_url, trailer_url)
+('Thriller'),
+('Science Fiction'),
+('Mystery'),
+('Horror');
+INSERT INTO Movies_Genres (movie_id, genre_id)
 VALUES
-('Naruto', 'Naruto follows the story of a young ninja named Naruto Uzumaki, who seeks recognition from his peers and dreams of becoming the Hokage, the village leader.', 2002, 500, 'Japan', 'naruto.jpg', 'https://example.com/naruto_trailer'),
-('Attack on Titan', 'In a world where humanity lives behind massive walls to protect themselves from Titans, giant humanoid creatures, a young boy named Eren Yeager seeks revenge against them.', 2013, 300, 'Japan', 'aot.jpg', 'https://example.com/aot_trailer'),
-('One Piece', 'Monkey D. Luffy and his pirate crew search for the greatest treasure ever left by the legendary Pirate, Gold Roger. The famous mystery treasure named "One Piece".', 1999, 800, 'Japan', 'onepiece.jpg', 'https://example.com/onepiece_trailer'),
-('My Hero Academia', 'In a world where almost every human has some form of superpower known as "Quirks", a young boy named Izuku Midoriya aspires to be a hero.', 2016, 150, 'Japan', 'mha.jpg', 'https://example.com/mha_trailer'),
-('Dragon Ball Super', 'Goku and his friends are defending the Earth against an onslaught of extraterrestrial enemies, powerful androids, and the most fearsome warrior in the universe.', 1989, 291, 'Japan', 'dbz.jpg', 'https://example.com/dbz_trailer'),
-('Demon Slayer', 'Tanjiro Kamado becomes a demon slayer after his family is slaughtered and his sister is turned into a demon.', 2019, 50, 'Japan', 'demonslayer.jpg', 'https://example.com/demonslayer_trailer'),
-('Death Note', 'A high school student discovers a supernatural notebook that allows him to kill anyone whose name he writes in it. He attempts to use it to eliminate criminals.', 2006, 37, 'Japan', 'deathnote.jpg', 'https://example.com/deathnote_trailer'),
-('Fullmetal Alchemist: Brotherhood', 'Two brothers, Edward and Alphonse Elric, seek the Philosopher\'s Stone to restore their bodies after a failed alchemical experiment.', 2009, 64, 'Japan', 'fma.jpg', 'https://example.com/fma_trailer'),
-('Tokyo Ghoul', 'A college student becomes a half-ghoul after a near-fatal encounter with one of these cannibalistic creatures. Now he must navigate life as a half-human, half-ghoul.', 2014, 48, 'Japan', 'tokyoghoul.jpg', 'https://example.com/tokyoghoul_trailer'),
-('Sword Art Online', 'Players of a virtual reality MMORPG find themselves trapped in the game, where dying in the game means dying in real life. A player named Kirito must find a way out.', 2012, 25, 'Japan', 'sao.jpg', 'https://example.com/sao_trailer'),
-('Neon Genesis Evangelion', 'A group of teenagers is tasked with piloting giant bio-mechanical robots to defend the Earth from mysterious beings known as Angels.', 1995, 26, 'Japan', 'evangelion.jpg', 'https://example.com/evangelion_trailer'),
-('Hunter x Hunter', 'Gon Freecss aspires to become a Hunter to find his father, who left him when he was younger. He joins a dangerous adventure to meet his father and uncover the world\'s secrets.', 2011, 148, 'Japan', 'hxh.jpg', 'https://example.com/hxh_trailer'),
-('Your Name', 'Two strangers swap bodies and discover a supernatural connection between them. Together they work to uncover the mystery of their connection.', 2016, 106, 'Japan', 'yourname.jpg', 'https://example.com/yourname_trailer'),
-('One Punch Man', 'Saitama is a superhero who can defeat any opponent with a single punch, but he struggles with boredom and finding a worthy adversary.', 2015, 12, 'Japan', 'onepunchman.jpg', 'https://example.com/onepunchman_trailer'),
-('Bleach', 'Ichigo Kurosaki, a teenager with the ability to see ghosts, becomes a Soul Reaper and is tasked with protecting the world from evil spirits known as Hollows.', 2004, 366, 'Japan', 'bleach.jpg', 'https://example.com/bleach_trailer'),
-('Cowboy Bebop', 'Set in the year 2071, a crew of bounty hunters aboard the spaceship Bebop hunts down criminals across the solar system.', 1998, 26, 'Japan', 'cowboybebop.jpg', 'https://example.com/cowboybebop_trailer'),
-('Trinity Blood', 'In a post-apocalyptic future, vampires and humans are in an all-out war, and a secret organization is tasked with keeping the peace between them.', 2005, 24, 'Japan', 'trinityblood.jpg', 'https://example.com/trinityblood_trailer'),
-('Ghost in the Shell', 'In the future, the line between humanity and artificial intelligence is blurred as a cyborg cop hunts a hacker who is threatening society.', 1995, 1, 'Japan', 'gits.jpg', 'https://example.com/gits_trailer'),
-('Fruits Basket', 'After the death of her mother, Tohru Honda discovers that members of the Sohma family are cursed to turn into animals of the Chinese zodiac.', 2001, 26, 'Japan', 'fruitsbasket.jpg', 'https://example.com/fruitsbasket_trailer'),
-('Yu Yu Hakusho', 'Yusuke Urameshi, a delinquent teenager, becomes a Spirit Detective after he dies unexpectedly and must protect the human world from demons.', 1992, 112, 'Japan', 'yyh.jpg', 'https://example.com/yyh_trailer'),
-('Akira', 'Set in a dystopian post-apocalyptic Tokyo, a biker gang member gains psychic powers that lead him to confront the corrupt government.', 1988, 2, 'Japan', 'akira.jpg', 'https://example.com/akira_trailer');
-INSERT INTO Movies_Genres (movie_id, genre_id) VALUES
-(1, 1),
-(1, 3),
-(1, 7),
-(2, 1),
-(2, 6),
-(2, 5),
-(3, 1),
-(3, 3),
-(3, 7),
-(4, 1),
-(4, 7),
-(4, 8),
-(5, 1),
-(5, 3),
-(5, 7),
-(6, 1),
-(6, 3),
-(6, 5),
-(7, 1),
-(7, 4),
-(7, 9),
-(8, 1),
-(8, 3),
-(8, 4),
-(9, 1),
-(9, 5),
-(9, 9),
-(10, 1),
-(10, 6),
-(10, 3),
-(11, 6),
-(11, 1),
-(11, 5),
-(12, 1),
-(12, 3),
-(12, 7),
-(13, 4),
-(13, 7),
-(13, 8),
-(14, 1),
-(14, 7),
-(15, 1),
-(15, 3),
-(15, 5),
-(16, 1),
-(16, 6),
-(16, 10),
-(17, 1),
-(17, 5),
-(18, 6),
-(18, 9),
-(19, 1),
-(19, 7),
-(19, 14),
-(20, 1),
-(20, 5);
+(1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5),
+(7, 5), (8, 5), (9, 5), (10, 5), (11, 5), (12, 5),
+(13, 5), (14, 5), (15, 5), (16, 5), (17, 5), (18, 5),
+(19, 5), (20, 5);
 INSERT INTO Users (username, email, password, full_name, profile_picture)
 VALUES
-('john_doe', 'john.doe@example.com', 'hashed_password_1', 'John Doe', 'https://example.com/johndoe.jpg'),
-('jane_smith', 'jane.smith@example.com', 'hashed_password_2', 'Jane Smith', 'https://example.com/janesmith.jpg'),
-('anime_fan', 'anime.fan@example.com', 'hashed_password_3', 'Anime Fan', 'https://example.com/animefan.jpg');
+('narutoFan', 'naruto@anime.com', 'password123', 'Naruto Uzumaki', 'https://example.com/naruto-profile.jpg'),
+('aotFan', 'aot@anime.com', 'password123', 'Eren Jaeger', 'https://example.com/aot-profile.jpg'),
+('onePieceFan', 'onepiece@anime.com', 'password123', 'Monkey D. Luffy', 'https://example.com/onepiece-profile.jpg');
 INSERT INTO Ratings (user_id, movie_id, rating)
 VALUES
-(1, 1, 8), 
-(1, 2, 9), 
-(2, 3, 7), 
-(2, 4, 10),
-(3, 5, 6); 
+(1, 1, 9), (2, 2, 8), (3, 3, 10), (1, 4, 7), (2, 5, 10),
+(3, 6, 9), (1, 7, 6), (2, 8, 8), (3, 9, 7), (1, 10, 9);
 INSERT INTO Watch_History (user_id, movie_id)
 VALUES
-(1, 1), 
-(1, 2), 
-(2, 3), 
-(3, 4), 
-(1, 5); 
+(1, 1), (2, 2), (3, 3), (1, 4), (2, 5),
+(3, 6), (1, 7), (2, 8), (3, 9), (1, 10);
 INSERT INTO Comments (user_id, movie_id, comment)
 VALUES
-(1, 1, 'Naruto is a great anime with amazing character development!'),
-(2, 2, 'The plot of Attack on Titan is very intense and keeps you at the edge of your seat!'),
-(3, 3, 'One Piece is an epic adventure with a lot of emotional moments.'),
-(1, 4, 'My Hero Academia is fun and inspirational, love the concept of Quirks.'),
-(2, 5, 'Dragon Ball Z is a classic, but it\'s starting to feel a little repetitive.');
+(1, 1, 'Great story, but the pacing could have been better.'),
+(2, 2, 'Amazing world-building and intense action scenes.'),
+(3, 3, 'A timeless classic with a gripping story.');
+INSERT INTO SubMovies (movie_id, submovie_title, submovie_description, release_year, duration)
+VALUES
+(1, 'Naruto Shippuden', 'The continuation of Naruto\'s story as a teenager facing even more powerful enemies.', 2007, 220),
+(2, 'Attack on Titan: The Final Season', 'The final season where humanity faces its last battle against the Titans.', 2020, 25);
+INSERT INTO Episodes (movie_id, season, episode_number, episode_title, episode_description, release_date, duration)
+VALUES
+(1, 1, 1, 'Enter: Naruto Uzumaki!', 'The beginning of Naruto\'s journey as he enters the ninja academy.', '2002-10-03', 23),
+(2, 1, 1, 'To You, in 2000 Years', 'The episode where the Titans first breach Wall Maria.', '2013-04-07', 25);
