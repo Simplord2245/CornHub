@@ -10,6 +10,6 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
-        return view('admin.index', compact('user'));
+        return view('index', compact('user'));
     }
 }

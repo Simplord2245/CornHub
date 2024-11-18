@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,12 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-
+Route::get('/movie', [MoviesController::class,'index'])->name('movie.index');
 // Xử lý đăng nhập / đăng xuất
-Route::get('/', [UsersController::class, 'login'])->name('login');
+Route::get('/login', [UsersController::class, 'login'])->name('login');
 Route::get('/create', [UsersController::class, 'create'])->name('create');
 Route::get('/register', [UsersController::class, 'register'])->name('register');
-Route::get('/logon', [UsersController::class, 'logon'])->name('logon');
+Route::post('/logon', [UsersController::class, 'logon'])->name('logon');
 
 // Bảo vệ bởi authentication => phải đăng nhập mới có quyền truy cập
 Route::middleware('auth')->prefix('/admin')->group(function(){    

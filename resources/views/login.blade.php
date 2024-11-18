@@ -20,7 +20,8 @@
   </div>
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-    <form action="" method="post">
+    <form action="{{route('logon')}}" method="post">
+      @csrf
       <div class="form-group has-feedback">
         <input type="email" class="form-control" name="email" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

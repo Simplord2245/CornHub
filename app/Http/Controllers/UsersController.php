@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
         $credentials = $request->only('name', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.index');
+            return redirect()->route('movie.index');
         } else {
             return redirect()->route('login')->with('err', 'Sai tài khoản hoặc mật khẩu');
         }
