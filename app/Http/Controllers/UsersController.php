@@ -17,7 +17,7 @@ class UsersController extends Controller
     // Xử lý đăng nhập
     public function logon(Request $request)
     {
-        $credentials = $request->only('name', 'password');
+        $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->route('movie.index');
         } else {

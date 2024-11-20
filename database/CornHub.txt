@@ -126,9 +126,9 @@ VALUES
 (19, 5), (20, 5);
 INSERT INTO Users (username, email, password, full_name, profile_picture)
 VALUES
-('narutoFan', 'naruto@anime.com', 'password123', 'Naruto Uzumaki', 'https://example.com/naruto-profile.jpg'),
-('aotFan', 'aot@anime.com', 'password123', 'Eren Jaeger', 'https://example.com/aot-profile.jpg'),
-('onePieceFan', 'onepiece@anime.com', 'password123', 'Monkey D. Luffy', 'https://example.com/onepiece-profile.jpg');
+('narutoFan', 'naruto@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Naruto Uzumaki', 'https://example.com/naruto-profile.jpg'),
+('aotFan', 'aot@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Eren Jaeger', 'https://example.com/aot-profile.jpg'),
+('onePieceFan', 'onepiece@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Monkey D. Luffy', 'https://example.com/onepiece-profile.jpg');
 INSERT INTO Ratings (user_id, movie_id, rating)
 VALUES
 (1, 1, 9), (2, 2, 8), (3, 3, 10), (1, 4, 7), (2, 5, 10),

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class MoviesController extends Controller
 {
     public function index(){
-        $movie = Movies::all();
-        return view('movie', compact('movie'));
+        $movies = Movies::with('Genres')->get();
+        return view('movie', compact('movies'));
     }
+
 }
