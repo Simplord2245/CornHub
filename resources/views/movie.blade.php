@@ -25,12 +25,13 @@
                     @foreach($movies as $movie)
                     <tr>
                         <td>{{ $movie->title }}</td>
-                        <td>
+                        {{-- <td>
                             @foreach($movie->Genres as $genre)
                                 {{ $genre->name }}
                             @endforeach
-                        </td>
+                        </td> --}}
         
+                        <td>{{ $movie->genre_name }}</td>
                         <td>{{ $movie->release_year }}</td>
                         <td>{{ $movie->duration }}</td>
                         <td>{{ $movie->nation }}</td>
