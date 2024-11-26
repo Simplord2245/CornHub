@@ -4,13 +4,28 @@ USE CornHub;
 CREATE TABLE Movies (
     movie_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    description TEXT,
-    release_year INT,
-    duration INT,
     nation VARCHAR(50),
-    image_url VARCHAR(255),
-    trailer_url VARCHAR(255),
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE SubMovies (
+    submovie_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    submovie_title VARCHAR(255) NOT NULL,
+    submovie_description TEXT,
+    release_year INT,
+    image VARCHAR(255),
+    trailer_url VARCHAR(255),
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
+);
+CREATE TABLE Episodes (
+    episode_id INT AUTO_INCREMENT PRIMARY KEY,
+    submovie_id INT,
+    episode_number INT,
+    duration INT,
+    url VARCHAR(255),
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (submovie_id) REFERENCES SubMovies(submovie_id) ON DELETE CASCADE
 );
 CREATE TABLE Genres (
     genre_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -58,72 +73,81 @@ CREATE TABLE Comments (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
 );
-CREATE TABLE SubMovies (
-    submovie_id INT AUTO_INCREMENT PRIMARY KEY,
-    movie_id INT,
-    submovie_title VARCHAR(255) NOT NULL,
-    submovie_description TEXT,
-    release_year INT,
-    duration INT,
-    image_url VARCHAR(255),
-    trailer_url VARCHAR(255),
-    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
-);
-CREATE TABLE Episodes (
-    episode_id INT AUTO_INCREMENT PRIMARY KEY,
-    movie_id INT,
-    season INT,
-    episode_number INT,
-    episode_title VARCHAR(255) NOT NULL,
-    episode_description TEXT,
-    release_date DATE,
-    duration INT,
-    image_url VARCHAR(255),
-    trailer_url VARCHAR(255),
-    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id) ON DELETE CASCADE
-);
-INSERT INTO Movies (title, description, release_year, duration, nation, image_url, trailer_url) VALUES 
-('Naruto', 'Naruto Uzumaki, a young ninja with a dream to become the strongest ninja and lead his village.', 2002, 220, 'Japan', 'naruto.jpg', 'https://youtube.com/trailer/naruto'),
-('Attack on Titan', 'Humanity fights for survival against gigantic humanoid creatures known as Titans.', 2013, 25, 'Japan', 'aot.jpg', 'https://youtube.com/trailer/aot'),
-('One Piece', 'Monkey D. Luffy and his pirate crew explore the Grand Line in search of the greatest treasure ever left by the legendary Pirate, Gold Roger.', 1999, 24, 'Japan', 'onepiece.jpg', 'https://youtube.com/trailer/onepiece'),
-('Demon Slayer', 'Tanjiro Kamado becomes a demon slayer to avenge his family and cure his sister Nezuko, who was turned into a demon.', 2019, 23, 'Japan', 'demonslayer.jpg', 'https://youtube.com/trailer/demonslayer'),
-('Fullmetal Alchemist: Brotherhood', 'Two brothers search for a Philosopher’s Stone after an attempt to revive their mother goes awry and leaves them in damaged physical forms.', 2009, 24, 'Japan', 'fullmetal.jpg', 'https://youtube.com/trailer/fullmetal'),
-('My Hero Academia', 'In a world where almost every human has powers, a young boy without powers still dreams of becoming the greatest hero.', 2016, 23, 'Japan', 'mha.jpg', 'https://youtube.com/trailer/mha'),
-('Dragon Ball Z', 'Goku and his companions battle alien foes, androids, and extraterrestrial threats to save the Earth.', 1989, 24, 'Japan', 'dbz.jpg', 'https://youtube.com/trailer/dbz'),
-('One Punch Man', 'Saitama, a man who can defeat anyone with one punch, struggles to find a worthy opponent and battles monsters to protect humanity.', 2015, 12, 'Japan', 'onepunchman.jpg', 'https://youtube.com/trailer/onepunchman'),
-('Sword Art Online', 'Players of a virtual reality MMORPG become trapped in the game, and the only way out is to clear the game.', 2012, 22, 'Japan', 'sao.jpg', 'https://youtube.com/trailer/sao'),
-('Tokyo Ghoul', 'Ken Kaneki, a college student, becomes a half-ghoul after a near-fatal accident and must survive in a world full of ghoul-human conflicts.', 2014, 24, 'Japan', 'tokyoghoul.jpg', 'https://youtube.com/trailer/tokyoghoul'),
-('Death Note', 'A high school student discovers a mysterious notebook that grants him the power to kill anyone whose name he writes in it.', 2006, 23, 'Japan', 'deathnote.jpg', 'https://youtube.com/trailer/deathnote'),
-('Neon Genesis Evangelion', 'Teenagers must pilot giant mechs to protect Earth from mysterious beings called Angels.', 1995, 24, 'Japan', 'evangelion.jpg', 'https://youtube.com/trailer/evangelion'),
-('Bleach', 'Ichigo Kurosaki, a teenager with the ability to see ghosts, must fight evil spirits known as Hollows and protect the living.', 2004, 23, 'Japan', 'bleach.jpg', 'https://youtube.com/trailer/bleach'),
-('Attack on Titan', 'Humanity fights for survival against gigantic humanoid creatures known as Titans.', 2013, 25, 'Japan', 'aot.jpg', 'https://youtube.com/trailer/aot'),
-('Hunter x Hunter', 'A young boy named Gon Freecss embarks on an adventure to find his father, who was an infamous Hunter.', 2011, 24, 'Japan', 'hunterxhunter.jpg', 'https://youtube.com/trailer/hunterxhunter'),
-('Fairy Tail', 'A young girl, Lucy, joins a powerful wizard guild, Fairy Tail, and teams up with Natsu and his dragon Igneel.', 2009, 24, 'Japan', 'fairytail.jpg', 'https://youtube.com/trailer/fairytail'),
-('Cowboy Bebop', 'In the year 2071, a group of bounty hunters embark on various missions across the galaxy in their spaceship called the Bebop.', 1998, 26, 'Japan', 'cowboybebop.jpg', 'https://youtube.com/trailer/cowboybebop'),
-('Akira', 'In a dystopian future, a gang of motorcycle rebels uncover the terrifying secret of a government project involving psychic powers.', 1988, 120, 'Japan', 'akira.jpg', 'https://youtube.com/trailer/akira'),
-('Your Name', 'Two teenagers, a boy and a girl, find themselves mysteriously connected by a strange supernatural occurrence.', 2016, 106, 'Japan', 'yourname.jpg', 'https://youtube.com/trailer/yourname'),
-('Spirited Away', 'A young girl is trapped in a mysterious world of spirits and must find a way to save her parents and return home.', 2001, 125, 'Japan', 'spiritedaway.jpg', 'https://youtube.com/trailer/spiritedaway'),
-('Princess Mononoke', 'A young warrior embarks on a journey to the forest of the gods to resolve a conflict between humans and nature spirits.', 1997, 134, 'Japan', 'princessmononoke.jpg', 'https://youtube.com/trailer/princessmononoke');
+INSERT INTO Movies (title, nation) VALUES
+('Naruto', 'Nhật Bản'),
+('Fairy Tail', 'Nhật Bản'),
+('One Piece', 'Nhật Bản'),
+('Bleach', 'Nhật Bản'),
+('Pokemon', 'Nhật Bản'),
+('Arcane', 'Mỹ'),
+('Dandadan', 'Nhật Bản'),
+('Dragon Ball', 'Nhật Bản'),
+('Date A Live', 'Nhật Bản'),
+('Attack On Titan', 'Nhật Bản'),
+('Boku no Hero Academia', 'Nhật Bản'),
+('Jujutsu Kaisen', 'Nhật Bản');
+INSERT INTO SubMovies (movie_id, submovie_title, submovie_description, release_year, image, trailer_url) VALUES
+(1, 'Naruto', 'Phần đầu trong hai loạt phim hoạt hình được sản xuất bởi Studio Pierrot và Aniplex đã công chiếu khắp Nhật Bản trên mạng lưới truyền hình TV Tokyo và mạng lưới hoạt hình truyền hình vệ tinh Animax vào ngày 3 tháng 10 năm 2002. Phần đầu tiên kéo dài trong 9 mùa 12 năm trước, hồ ly 9 đuôi tấn công làng ninja Mộc Diệp, Hokage Đệ Tứ đã đánh bại và phong ấn vào cậu bé Naruto.Từ đó, Naruto bị mọi người xa lánh, vậy nên cậu tìm ra cách được thừa nhận và chú ý duy nhất – qua các trò phá phách và nghịch ngợm.Câu chuyện chính bám theo sự trưởng thành và tiến bộ của Naruto và bạn cậu khi làm ninja, và nhấn mạnh mối quan hệ giữa họ và sự ảnh hưởng của quá khứ đến tính cách họ. Naruto tìm được hai người bạn đồng hành cùng là Uchiha Sasuke và Haruno Sakura, cuộc phiêu lưu bắt đầu.', '2002', 'naruto.jpg', 'https://www.youtube.com/watch?v=-G9BqkgZXRA'),
+(1, 'Naruto: Huyền thoại đá Gelel', 'Câu chuyện mở đầu với trận chiến tại một bờ biển hoang vắng vào ban đêm giữa ninja làng Cát và những tên khổng lồ mặc chiếc áo giáp nâu. Những ninja làng Cát đang hoàn toàn bị thất thế trước những tên to lớn này. Đúng lúc đó Gaara và Kankuro xuất hiện để bảo vệ họ. Do lá chắn cát của Gaara quá mạnh nên những tên to lớn kia buộc phải rút lui. Họ nhìn thấy những tên ấy chạy ra một con tàu chiến giữa biển. 2 ninja quyết chèo thuyền ra để tìm hiểu rõ về con tàu ấy, mặc cho người khác khuyên ngăn, khi bóng họ và tàu khuất dần, tất cả chỉ nghe thấy tiếng kêu thất thanh và không thấy họ quay lại nữa.', 2005, 'naruto1.jpg', 'https://www.youtube.com/watch?v=4EiTuiYlvgo'),
+(1, 'Naruto: Sức Mạnh Vĩ Thú', 'Tiếp nối phần I sau khi cậu bé cùng sư phụ Jiraiya của mình đi tập luyện xa trở về làng Lá. Sau khi huấn luyện 2 năm rưỡi với Jiraiya, Naruto trở về làng Lá, đoàn tụ với những người bạn cậu đã chia tay, và lập lại Nhóm 7, giờ được gọi là Nhóm Kakashi, với Sai thế chỗ Sasuke. Tất cả những người bạn của Naruto đều đã trưởng thành và thăng cấp, có người hơn người khác. Không giống như phần đầu khi chúng chỉ đóng vai trò phụ, tổ chức Akatsuki chiếm lấy vai trò đối nghịch chính trong tham vọng thống trị thế giới.', 2007, 'naruto2.jpg', 'https://youtu.be/1dy2zPPrKD0'),
+(1, 'Naruto: Trận chiến cuối cùng', 'Hai năm sau khi các sự kiện của cuộc Chiến tranh Thế giới Thứ tư Shinobi, mặt trăng bắt đầu đi xuống về phía Trái đất. Với trăng bây giờ là một ngôi sao băng đó sẽ phá hủy tất cả mọi thứ về tác động, Naruto phải đối phó với mối đe dọa này. Trong khi đó, Toneri Ōtsutsuki, một hậu duệ của Hamura Ōtsutsuki xác định thực hiện về di sản tổ tiên mình, xuất hiện và bắt cóc Hanabi Hyuga sau khi thất bại trong việc bắt lấy Hinata. Naruto, Hinata, Sakura, Sai, và Shikamaru được triển khai để đi giải cứu Hanabi. Ngoài ra Toneri và Hinata cùng tham gia với anh. Tại thời điểm đó, Toneri đánh cắp Byakugan Hanabi và cấy chúng trong hốc mắt trống rỗng của mình, đánh thức các Tenseigan kín bởi con cháu của Hamura trong thiên niên kỷ qua. Ông cũng thành công trong việc bắt cóc Hinata, đề nghị cô kết hôn với anh ta. Cuối cùng, Naruto đã đánh bại Toneri, dừng lại mặt trăng rơi xuống, và cứu lấy Hinata. Naruto sau đó thú nhận tình yêu của mình cho Hinata cùng với hai nụ hôn. Bộ phim kết thúc với một loạt các đèn flash-rực rỡ cùng đám cưới Naruto và Hinata và con cái của họ, Boruto và Himawari.', 2007, 'naruto3.jpg', 'https://youtu.be/tA3yE4_t6SY');
+INSERT INTO Episodes (submovie_id, episode_number, duration, url) VALUES
+(1, 1, 24, 'https://www.youtube.com/watch?v=-SBBef-OEiE'),
+(1, 2, 24, 'https://www.youtube.com/watch?v=NP_unUdyIpU&t=3s'),
+(1, 3, 24, 'https://www.youtube.com/watch?v=Hiy2oGwNc1I'),
+(1, 4, 24, 'https://www.youtube.com/watch?v=cDJwpPJIaRA'),
+(1, 5, 24, 'https://www.youtube.com/watch?v=dC5aaFX0D8U'),
+(1, 6, 24, 'https://www.youtube.com/watch?v=CGhK2NPKtQE'),
+(1, 7, 24, 'https://www.youtube.com/watch?v=MucyhPWlx28'),
+(1, 8, 24, 'https://www.youtube.com/watch?v=JtfyJemtkt0'),
+(1, 9, 24, 'https://www.youtube.com/watch?v=QuMJjYgHsiM'),
+(1, 10, 24, 'https://www.youtube.com/watch?v=TesYVK3lHkg'),
+(2, 1, 97, 'https://www.youtube.com/watch?v=tE6kJryE_uc'),
+(1, 1, 24, 'https://youtu.be/skluj-DE5xI'),
+(3, 2, 24, 'https://youtu.be/5q1yhqqNeU0'),
+(3, 3, 24, 'https://youtu.be/PuytaM3WWoE'),
+(3, 4, 24, 'https://youtu.be/l2bqqiB1R-M'),
+(3, 5, 24, 'https://youtu.be/NPCwiFcYvEM'),
+(3, 6, 24, 'https://youtu.be/WPGAK-I-90o'),
+(3, 7, 24, 'https://youtu.be/LhKoZhKr2y8'),
+(3, 8, 24, 'https://youtu.be/zEVSt0DZ7DY'),
+(3, 9, 24, 'https://youtu.be/8jX1ced_3Jc'),
+(3, 10, 24, 'https://youtu.be/fLpeigFMVX0'),
+(4, 1, 112, 'https://youtu.be/_uKbx152unY');
+
 INSERT INTO Genres (name) 
 VALUES
-('Action'),
-('Adventure'),
-('Fantasy'),
-('Drama'),
 ('Shounen'),
-('Supernatural'),
-('Thriller'),
-('Science Fiction'),
+('Shoujo'),
+('Seinen'),
+('Josei'),
+('Isekai'),
+('Mecha'),
+('Slice of Life'),
+('Fantasy'),
+('Sports'),
+('Psychological'),
+('Horror'),
+('Romance'),
+('Comedy'),
 ('Mystery'),
-('Horror');
-INSERT INTO Movies_Genres (movie_id, genre_id)
-VALUES
-(1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5),
-(7, 5), (8, 5), (9, 5), (10, 5), (11, 5), (12, 5),
-(13, 5), (14, 5), (15, 5), (16, 5), (17, 5), (18, 5),
-(19, 5), (20, 5);
+('Harem'),
+('Action'),
+('Sci-Fi'),
+('Adventure');
+INSERT INTO Movies_Genres (movie_id, genre_id) VALUES
+(1, 1), (1, 16), (1, 3), (1, 8),
+(2, 1), (2, 16), (2, 8), (2, 12),
+(3, 1), (3, 16), (3, 8), (3, 13),
+(4, 1), (4, 16), (4, 8), (4, 6),
+(5, 1), (5, 8), (5, 12),
+(6, 17), (6, 18),
+(7, 1), (7, 16), (7, 8), (7, 13),
+(8, 1), (8, 16), (8, 8), (8, 6),
+(9, 1), (9, 16), (9, 8), (9, 12),
+(10, 1), (10, 16), (10, 8), (10, 17),
+(11, 1), (11, 16), (11, 8), (11, 12),
+(12, 1), (12, 16), (12, 8), (12, 10);
 INSERT INTO Users (username, email, password, full_name, profile_picture)
 VALUES
 ('narutoFan', 'naruto@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Naruto Uzumaki', 'https://example.com/naruto-profile.jpg'),
@@ -142,11 +166,3 @@ VALUES
 (1, 1, 'Great story, but the pacing could have been better.'),
 (2, 2, 'Amazing world-building and intense action scenes.'),
 (3, 3, 'A timeless classic with a gripping story.');
-INSERT INTO SubMovies (movie_id, submovie_title, submovie_description, release_year, duration)
-VALUES
-(1, 'Naruto Shippuden', 'The continuation of Naruto\'s story as a teenager facing even more powerful enemies.', 2007, 220),
-(2, 'Attack on Titan: The Final Season', 'The final season where humanity faces its last battle against the Titans.', 2020, 25);
-INSERT INTO Episodes (movie_id, season, episode_number, episode_title, episode_description, release_date, duration)
-VALUES
-(1, 1, 1, 'Enter: Naruto Uzumaki!', 'The beginning of Naruto\'s journey as he enters the ninja academy.', '2002-10-03', 23),
-(2, 1, 1, 'To You, in 2000 Years', 'The episode where the Titans first breach Wall Maria.', '2013-04-07', 25);
