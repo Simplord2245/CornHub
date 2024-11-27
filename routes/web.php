@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\SubMoviesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 Route::get('/movie', [MoviesController::class,'index'])->name('movie.index');
+Route::get('/movie/submovie', [SubMoviesController::class,'index'])->name('submovie.index');
 // Xử lý đăng nhập / đăng xuất
 Route::get('/login', [UsersController::class, 'login'])->name('login');
 Route::get('/create', [UsersController::class, 'create'])->name('create');

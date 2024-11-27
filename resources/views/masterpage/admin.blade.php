@@ -10,15 +10,14 @@
   <link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
   <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
   <link rel="stylesheet" href="{{asset('//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')}}">
- 
   <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
+  <link rel="stylesheet" href="{{asset('bootstrap/css/main_style.css')}}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
     <a href="#" class="logo">
-
       <span class="logo-mini"><b>A</b>LT</span>
       <span class="logo-lg"><b>Admin</b>PjRed</span>
     </a>
@@ -113,7 +112,7 @@
       </div>
       <ul class="sidebar-menu">
       <li>
-          <a href="index.php">
+          <a href="{{route('movie.index')}}">
             <i class="fa fa-home"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -127,7 +126,6 @@
           </ul>
         </li>
         
-       
         <li>
           <a href="#">
             <i class="fa fa-th"></i> <span>Widgets</span>
@@ -137,17 +135,18 @@
       </ul>
     </section>
   </aside>
-  <div>
+
+  <div class="content-wrapper">
     @yield('content')
   </div>
+
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.3
     </div>
-    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2014-2015 <a href="#">CornHub</a>.</strong> All rights reserved.
   </footer>
 </div>
+
 <script src="{{asset('plugins/jQuery/jQuery-2.2.0.min.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>

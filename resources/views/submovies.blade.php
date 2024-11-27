@@ -11,20 +11,23 @@
                 <thead>
                     <tr>
                         <th>Tiêu Đề</th>
-                        <th>Thể Loại</th>
-                        <th>Quốc Gia</th>
+                        <th>Ảnh</th>
+                        <th>Năm phát hành</th>
+                        <th>Trailer</th>
+                        <th>Số tập</th>
+                        <th>Mô tả</th>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($movies as $movie)
+                    @foreach($submovies as $submovie)
                     <tr>
-                        <td>{{ $movie->title }}</td>
-                        <td>
-                            {{ implode(', ', $movie->Genres->pluck('name')->toArray()) }}
-                        </td>
-                        
-                        <td>{{ $movie->nation }}</td>
+                        <td>{{ $submovie->submovie_title }}</td>                        
+                        <td><img src="{{asset('img/'. $submovie->image)}}" alt="" width="50px" height="80px"></td>                        
+                        <td>{{ $submovie->release_year }}</td>
+                        <td>{{ $submovie->trailer_url }}</td>
+                        <td>{{ $submovie->episodes_count }}</td>
+                        <td>{{ Str::limit($submovie->submovie_description, 30) }}</td>
                         <td>
                             <a href="#" class="btn btn-primary btn-sm">Sửa</a>
                         </td>
