@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminPjRed | Registration Page</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>CornHub | Registration Page</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
@@ -16,7 +17,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="!#"><b>Admin</b>PjRed</a>
+    <a href="!#"><b>Admin</b>CornHub</a>
   </div>
 
   <div class="register-box-body">
@@ -63,7 +64,7 @@
         <!-- /.col -->
       </div>
     </form>
-    <a href="login.php" class="text-center">I already have a membership</a>
+    <a href="{{route('login')}}" class="text-center">I already have a membership</a>
   </div>
   <!-- /.form-box -->
 </div>

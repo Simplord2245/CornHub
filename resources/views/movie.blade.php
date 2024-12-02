@@ -6,7 +6,7 @@
 <div class="box">
     <div class="box-body">
         <div class="container">
-            <h1>Danh Sách Phim</h1>
+            <h1>Danh sách phim</h1>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach($movies as $movie)
                     <tr>
-                        <td>{{ $movie->title }}</td>
+                        <td><a href="{{route('submovie.index', ['id' => $movie->movie_id, 'name' => $movie->title])}}">{{ $movie->title }}</a></td>
                         <td>
                             {{ implode(', ', $movie->Genres->pluck('name')->toArray()) }}
                         </td>
@@ -29,12 +29,15 @@
                             <a href="#" class="btn btn-primary btn-sm">Sửa</a>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-danger btn-sm">Xoá</a>
+                            <a href="{{route('movie.delete', $movie->movie_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xoá {{ $movie->title }}?');" class="btn btn-danger btn-sm">Xoá</a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="pagination-wrapper">
+                {{ $movies->links() }}
+            </div>
         </div>
     </div>
 

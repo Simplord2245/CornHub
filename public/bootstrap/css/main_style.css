@@ -11,7 +11,11 @@ html, body {
     flex-direction: column; /* Sắp xếp theo chiều dọc */
     height: 100%; /* Chiếm toàn bộ chiều cao của cửa sổ */
 }
-
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh; /* Đảm bảo chiều cao tối thiểu bằng chiều cao cửa sổ */
+}
 /* Phần body-content chiếm không gian còn lại */
 .content-wrapper {
     flex: 1; /* Chiếm phần còn lại của không gian */
@@ -26,3 +30,142 @@ footer.main-footer {
     width: 100%;
     position: relative;
 }
+/* Bố cục */
+.movie-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Nút */
+button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.btn-trailer {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.btn-watch {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+.btn-watch a {
+    text-decoration: none;
+    color: white; /* Đảm bảo màu chữ trắng */
+}
+/* Định dạng cho iframe */
+iframe {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+/* Định dạng cho tiêu đề */
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+/* Định dạng cho danh sách tập phim */
+ul#episodeList {
+    list-style-type: none; /* Loại bỏ dấu chấm tròn */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Hiển thị các mục theo hàng ngang */
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng khi không đủ không gian */
+    gap: 10px; /* Khoảng cách giữa các mục */
+}
+
+/* Định dạng cho từng mục trong danh sách tập phim */
+ul#episodeList li {
+    background-color: #f8f8f8;
+    padding: 12px 20px; /* Thêm padding để các mục có kích thước dễ nhìn */
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-shrink: 0; /* Đảm bảo các mục không bị thu nhỏ khi không gian hẹp */
+}
+
+/* Hiệu ứng khi hover */
+ul#episodeList li:hover {
+    background-color: #ff4500;
+    color: white;
+}
+/* Lớp 'active' cho tập phim đang được chọn */
+ul#episodeList li.active {
+    background-color: #ff4500; /* Màu nền khi chọn */
+    color: white; /* Màu chữ khi chọn */
+}
+
+/* Điều chỉnh chiều rộng của container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Định dạng box */
+.box {
+    margin-bottom: 30px;
+}
+
+.box-body {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Tạo khoảng cách với các phần tử bên trên */
+}
+

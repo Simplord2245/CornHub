@@ -18,8 +18,8 @@
 
   <header class="main-header">
     <a href="#" class="logo">
-      <span class="logo-mini"><b>A</b>LT</span>
-      <span class="logo-lg"><b>Admin</b>PjRed</span>
+      <span class="logo-mini"><b>C</b>orn</span>
+      <span class="logo-lg"><b>Corn</b>Hub</span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -118,14 +118,33 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-th"></i> <span>Quản lý phim</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="products.php"><i class="fa fa-circle-o"></i> Danh sách</a></li>
-            <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+            <li><a href="products.php"><i class="fa fa-circle-o"></i> Danh sách phim</a></li>
+            <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Thêm mới phim</a></li>
           </ul>
         </li>
-        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Quản lý thể loại</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('genre.index')}}"><i class="fa fa-circle-o"></i> Danh sách thể loại</a></li>
+            <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Thêm mới thể loại</a></li>
+          </ul>
+        </li>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Quản người dùng</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="products.php"><i class="fa fa-circle-o"></i> Đánh giá</a></li>
+            <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Bình luận</a></li>
+            <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Lịch sử xem</a></li>
+          </ul>
+        </li>
         <li>
           <a href="#">
             <i class="fa fa-th"></i> <span>Widgets</span>
@@ -135,9 +154,10 @@
       </ul>
     </section>
   </aside>
-
+  <div class="main-wrapper">
   <div class="content-wrapper">
     @yield('content')
+  </div>
   </div>
 
   <footer class="main-footer">
