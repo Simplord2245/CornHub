@@ -168,4 +168,46 @@ ul#episodeList li.active {
     justify-content: center;
     margin-top: 20px; /* Tạo khoảng cách với các phần tử bên trên */
 }
+/* Mặc định cho màn hình lớn */
+.logo-lg {
+    font-size: 24px;
+}
 
+.sidebar-menu > li > a {
+    font-size: 16px;
+}
+
+/* Màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .logo-lg {
+        font-size: 18px;
+    }
+
+    .sidebar-menu > li > a {
+        font-size: 14px;
+    }
+
+    .main-header .navbar {
+        padding: 5px;
+    }
+}
+
+/* Màn hình nhỏ hơn 480px */
+@media (max-width: 480px) {
+    .logo-lg {
+        font-size: 14px;
+    }
+
+    .sidebar-menu > li > a {
+        font-size: 12px;
+    }
+
+    .main-sidebar {
+        display: none; /* Ẩn sidebar trên màn hình rất nhỏ */
+    }
+
+    .content-wrapper {
+        margin-left: 0;
+        padding: 10px;
+    }
+}
