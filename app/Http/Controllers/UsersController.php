@@ -33,7 +33,7 @@ class UsersController extends Controller
 
     public function create()
     {
-
+        
         return view('register');
     }
 

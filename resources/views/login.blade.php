@@ -30,7 +30,7 @@
             <form action="{{ route('logon') }}" method="post">
                 @csrf
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" name="username" placeholder="Name">
+                    <input type="text" class="form-control" name="username" placeholder="User Name">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
