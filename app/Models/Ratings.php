@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ratings extends Model
 {
     use HasFactory;
+    protected $table = 'Ratings';
+    protected $fillable = ['user_id', 'movie_id', 'comment'];
+    protected $primaryKey = 'comment_id';
 }

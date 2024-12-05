@@ -23,10 +23,19 @@
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
 
-    <form action="" method="post" enctype="multipart/form-data">
-    
+    <form action="{{route('register')}}" method="post" enctype="multipart/form-data">
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+    @csrf
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="name" placeholder="Full name">
+        <input type="text" class="form-control" name="full_name" placeholder="Full name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -42,14 +51,14 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="re_password" placeholder="Confirm password">
+        <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm password">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck" style="margin-left: 20px;">
             <label>
-              <input type="checkbox"><a href="#">I agree to the terms</a>
+              <input type="checkbox" name="terms" value="1">I agree to the terms</a>
             </label>
           </div>
         </div>
@@ -65,6 +74,15 @@
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
+<script>
+  $(document).ready(function () {
+      const $checkbox = $('input[name="terms"]');
+      const $submitButton = $('button[type="submit"]');
+      $checkbox.on('change', function () {
+          $submitButton.prop('disabled', !$checkbox.is(':checked'));
+      });
+  });
+</script>
 
 <!-- jQuery 2.2.0 -->
 <script src="{{asset('plugins/jQuery/jQuery-2.2.0.min.js')}}"></script>

@@ -42,7 +42,7 @@ Route::prefix('genre')->group(function(){
 // Xử lý đăng nhập / đăng xuất
 Route::get('/login', [UsersController::class, 'login'])->name('login');
 Route::get('/create', [UsersController::class, 'create'])->name('create');
-Route::get('/register', [UsersController::class, 'register'])->name('register');
+Route::post('/register', [UsersController::class, 'register'])->name('register');
 Route::post('/logon', [UsersController::class, 'logon'])->name('logon');
 
 // Bảo vệ bởi authentication => phải đăng nhập mới có quyền truy cập

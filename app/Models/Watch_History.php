@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Watch_History extends Model
 {
     use HasFactory;
+    protected $table = 'Watch_History';
+    protected $fillable = ['user_id', 'movie_id'];
+    protected $primaryKey = 'watch_id';
 }
