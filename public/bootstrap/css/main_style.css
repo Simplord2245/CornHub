@@ -150,6 +150,7 @@ ul#episodeList li.active {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
 }
 
 /* Định dạng box */
@@ -210,4 +211,32 @@ ul#episodeList li.active {
         margin-left: 0;
         padding: 10px;
     }
+}
+/* Định dạng thẻ a với lớp btn */
+.btn {
+    position: relative;  /* Đảm bảo vị trí của số đếm là chính xác */
+  } 
+  /* Định dạng số đếm */
+  .count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: bold;
+    transform: translate(50%, -50%);  /* Đảm bảo số đếm nằm ở góc trên cùng bên phải */
+  }
+  
+  /* Tùy chỉnh khi hover (nếu cần) */
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  #create-btn {
+    position: absolute;
+    top: 50px;  /* Khoảng cách từ cạnh trên */
+    right: 30px;  /* Khoảng cách từ cạnh phải */
+    z-index: 10;  /* Đảm bảo nút nằm trên các phần tử khác */
 }

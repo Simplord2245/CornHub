@@ -91,4 +91,8 @@ class UsersController extends Controller
         // Chuyển hướng sau khi đăng ký thành công
         return redirect()->route('movie.index')->with('success', 'Đăng ký thành công!');
 }
+    public function index(){
+        $users = User::where('role', 1)->paginate(13);
+        return view('users', compact('users'));
+    }
 }

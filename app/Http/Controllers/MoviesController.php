@@ -12,6 +12,10 @@ class MoviesController extends Controller
         $movies = Movies::with('Genres')->paginate(13);
         return view('movie', compact('movies'));
     }
+    public function create(){
+        
+        return view('movie_create');
+    }
     public function delete($id){
         $post = Movies::findOrFail($id);
         $post->delete();

@@ -7,6 +7,7 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách các phần phim của {{$movie_name}}</h1>
+            <a id="create-btn" href="" type="submit" class="btn btn-primary">Thêm mới</a>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>

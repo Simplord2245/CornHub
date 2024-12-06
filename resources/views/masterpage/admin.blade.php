@@ -122,8 +122,8 @@
             <i class="fa fa-th"></i> <span>Quản lý phim</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="products.php"><i class="fa fa-circle-o"></i> Danh sách phim</a></li>
-            <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Thêm mới phim</a></li>
+            <li><a href="{{route('movie.index')}}"><i class="fa fa-circle-o"></i> Danh sách phim</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> Thêm mới phim</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -141,6 +141,7 @@
             <i class="fa fa-th"></i> <span>Quản người dùng</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> Danh sách người dùng</a></li>
             <li><a href="products.php"><i class="fa fa-circle-o"></i> Đánh giá</a></li>
             <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Bình luận</a></li>
             <li><a href="products-create.php"><i class="fa fa-circle-o"></i> Lịch sử xem</a></li>

@@ -21,10 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');
+    // return redirect()->route('movie.index');
 });
 Route::prefix('movie')->group(function () {
     Route::get('/', [MoviesController::class, 'index'])->name('movie.index');
     Route::get('/delete/{id}', [MoviesController::class, 'delete'])->name('movie.delete');
+    Route::get('/create/{id?}', [MoviesController::class, 'create'])->name('movie.create');
     Route::prefix('submovie')->group(function () {
         Route::get('list/{id}/{name}', [SubMoviesController::class, 'index'])->name('submovie.index');
         Route::get('detail/{id}', [SubMoviesController::class, 'detail'])->name('submovie.detail');
@@ -33,6 +35,9 @@ Route::prefix('movie')->group(function () {
         Route::get('episodes/{id}/{name}', [EpisodesController::class, 'index'])->name('episodes.index');
         Route::get('episodes/delete/{id}', [EpisodesController::class, 'delete'])->name('episodes.delete');
     });
+});
+Route::prefix('user')->group(function(){
+    Route::get('/', [UsersController::class, 'index'])->name('user.index');
 });
 Route::prefix('genre')->group(function(){
     Route::get('/', [GenresController::class, 'index'])->name('genre.index');
