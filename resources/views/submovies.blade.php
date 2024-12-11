@@ -16,7 +16,9 @@
                         <th>Năm phát hành</th>
                         <th>Trailer</th>
                         <th>Số tập</th>
+                        <th>Dạng phim</th>
                         <th>Mô tả</th>
+                        <th>Lượt xem</th>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
@@ -28,7 +30,9 @@
                         <td style="text-align: center">{{ $submovie->release_year }}</td>
                         <td>{{ $submovie->trailer_url }}</td>
                         <td style="text-align: center"><a href="{{route('episodes.index', [ 'id' => $submovie->submovie_id, 'name' => $submovie->submovie_title ])}}">{{ $submovie->episodes_count }}</a></td>
+                        <td>{{ $submovie->type }}</td>
                         <td>{{ Str::limit($submovie->submovie_description, 30) }}</td>
+                        <td>{{ $submovie->views }}</td>
                         <td>
                             <a href="#" class="btn btn-primary btn-sm">Sửa</a>
                         </td>

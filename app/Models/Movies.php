@@ -11,6 +11,7 @@ class Movies extends Model
     protected $table = "movies";
     protected $fillable = ['title, nation'];
     protected $primaryKey = 'movie_id';
+    public $timestamps = false;
 
     public function Genres()
     {

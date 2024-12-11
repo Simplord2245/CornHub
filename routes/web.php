@@ -27,6 +27,7 @@ Route::prefix('movie')->group(function () {
     Route::get('/', [MoviesController::class, 'index'])->name('movie.index');
     Route::get('/delete/{id}', [MoviesController::class, 'delete'])->name('movie.delete');
     Route::get('/create/{id?}', [MoviesController::class, 'create'])->name('movie.create');
+    Route::post('/store/{id?}', [MoviesController::class, 'store'])->name('movie.store');
     Route::prefix('submovie')->group(function () {
         Route::get('list/{id}/{name}', [SubMoviesController::class, 'index'])->name('submovie.index');
         Route::get('detail/{id}', [SubMoviesController::class, 'detail'])->name('submovie.detail');

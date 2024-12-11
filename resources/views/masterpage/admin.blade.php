@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{asset('//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
   <link rel="stylesheet" href="{{asset('bootstrap/css/main_style.css')}}">
+  <!-- CSS Select2 -->
+<link href="{{asset('https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css')}}" rel="stylesheet" />
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -123,7 +125,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{route('movie.index')}}"><i class="fa fa-circle-o"></i> Danh sách phim</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Thêm mới phim</a></li>
+            <li><a href="{{route('movie.create')}}"><i class="fa fa-circle-o"></i> Thêm mới phim</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -175,5 +177,7 @@
 <script src="{{asset('plugins/fastclick/fastclick.js')}}"></script>
 <script src="{{asset('dist/js/app.min.js')}}"></script>
 <script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js')}}"></script>
 </body>
 </html>
