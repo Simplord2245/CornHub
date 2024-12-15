@@ -11,4 +11,6 @@ class Comments extends Model
     protected $table = 'Comments';
     protected $fillable = ['user_id', 'movie_id', 'rating'];
     protected $primaryKey = 'comment_id';
+
+    
 }

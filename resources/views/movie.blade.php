@@ -7,6 +7,7 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách phim</h1>
+            <a id="create-btn" href="{{route('movie.create')}}" type="submit" class="btn btn-primary">Thêm phim</a>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -26,7 +27,7 @@
                         
                         <td>{{ $movie->nation }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-sm">Sửa</a>
+                            <a href="{{route('movie.create', $movie->movie_id)}}" class="btn btn-primary btn-sm">Sửa</a>
                         </td>
                         <td>
                             <a href="{{route('movie.delete', $movie->movie_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xoá {{ $movie->title }}?');" class="btn btn-danger btn-sm">Xoá</a>

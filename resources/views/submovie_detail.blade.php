@@ -8,7 +8,7 @@
         <div class="container">
             <div class="movie-detail" style="display: flex; gap: 20px;">
                 <div class="movie-image">
-                    <img src="{{ asset('img/' . $submovie_detail->image) }}" alt="" height="400px" width="300px">
+                    <img src="{{ asset('storage/img/' . $submovie_detail->image) }}" alt="" height="400px" width="300px">
                 </div>
 
                 <div class="movie-info">

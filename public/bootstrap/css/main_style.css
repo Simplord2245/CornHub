@@ -240,3 +240,54 @@ ul#episodeList li.active {
     right: 30px;  /* Khoảng cách từ cạnh phải */
     z-index: 10;  /* Đảm bảo nút nằm trên các phần tử khác */
 }
+.genres-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các thể loại */
+}
+
+.genre-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa checkbox và tên */
+}
+
+.genre-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff; /* Màu chính của checkbox (hỗ trợ trình duyệt hiện đại) */
+    cursor: pointer;
+}
+
+.genre-item label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+.genres-group {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.genres-group label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.genre-item:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+.genres-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.genre-item {
+    display: flex;
+    align-items: center;
+}

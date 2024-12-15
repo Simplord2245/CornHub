@@ -18,32 +18,32 @@
                 @csrf
                 <div class="form-group">
                     <label for="">Tên phim</label>
-                    <input type="text" class="form-control" name="title" id="" placeholder="Nhập tên phim">
+                    <input type="text" class="form-control" name="title" id="" placeholder="Nhập tên phim" value="{{ old('title', $movie->title) }}">
                     @if($errors->has('title'))
-            <span>{{$errors->first('title')}}</span>
+                    <span class="text-danger">{{$errors->first('title')}}</span>
             @endif
                 </div>
                 <div class="form-group">
                     <label for="">Quốc gia</label>
-                    <input type="text" class="form-control" name="nation" id="" placeholder="Nhập quốc gia">
+                    <input type="text" class="form-control" name="nation" id="" placeholder="Nhập quốc gia" value="{{ old('nation', $movie->nation) }}">
                     @if($errors->has('nation'))
-            <span>{{$errors->first('nation')}}</span>
+                    <span class="text-danger">{{$errors->first('nation')}}</span>
             @endif
                 </div>
-                {{-- <div class="form-group">
-                    <label for="">Quốc gia</label>
-                    <input type="text" class="form-control" name="nation" id="" placeholder="Nhập quốc gia">
-                    @if($errors->has('nation'))
-            <span>{{$errors->first('nation')}}</span>
-            @endif
-                </div> --}}
-                <label for="genres">Thể loại:</label>
-    <select name="genres[]" id="genres" class="form-select" multiple="multiple" >
-        @foreach ($genre as $gen)
-        <option value="{{$gen->name}}">{{$gen->name}}</option>
-        @endforeach
-        <!-- Thêm nhiều thể loại nếu cần -->
-    </select>
+                <div class="form-group genres-group">
+                    <label for="">Thể loại</label>
+                    @foreach ($genre as $gen)
+                    <div class="genre-item">
+                        <input type="checkbox" id="genre_{{$gen->genre_id}}" name="genre_id[]" value="{{$gen->genre_id}}" 
+                        {{ in_array($gen->genre_id, $movie->Genres->pluck('genre_id')->toArray() ?? []) ? 'checked' : '' }}>
+                        <label for="genre_{{$gen->genre_id}}">{{$gen->name}}</label>
+                    </div>
+                    @endforeach
+                </div>
+                <p>@if($errors->has('genre_id'))
+                    <span class="text-danger">{{$errors->first('genre_id')}}</span>
+            @endif</p>
+                
                 @if ($movie->movie_id == null)
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
                 @else
@@ -55,11 +55,3 @@
 
 </div>
 @endsection
-<script>
-    $(document).ready(function() {
-        $('#genres').select2({
-            placeholder: "Chọn thể loại phim",
-            allowClear: true
-        });
-    });
-</script>

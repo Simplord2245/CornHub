@@ -30,6 +30,8 @@ Route::prefix('movie')->group(function () {
     Route::post('/store/{id?}', [MoviesController::class, 'store'])->name('movie.store');
     Route::prefix('submovie')->group(function () {
         Route::get('list/{id}/{name}', [SubMoviesController::class, 'index'])->name('submovie.index');
+        Route::get('create/{movie_id}/{id?}', [SubMoviesController::class, 'create'])->name('submovie.create');
+        Route::post('store/{movie_id}/{id?}', [SubMoviesController::class, 'store'])->name('submovie.store');
         Route::get('detail/{id}', [SubMoviesController::class, 'detail'])->name('submovie.detail');
         Route::get('watch/{id}', [SubMoviesController::class, 'watch'])->name('submovie.watch');
         Route::get('delete/{id}', [SubMoviesController::class, 'delete'])->name('submovie.delete');
