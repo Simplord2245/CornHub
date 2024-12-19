@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,7 @@ class UsersController extends Controller
     // Xử lý đăng nhập
     public function logon(Request $request)
 {
-    // Validate dữ liệu
+    // Validate dữ liệu đầu vào
     $request->validate([
         'username' => 'required|string|max:255',
         'password' => 'required|string|min:6',
@@ -29,24 +30,27 @@ class UsersController extends Controller
     // Thử đăng nhập
     if (Auth::attempt($credentials, $remember)) {
         $user = Auth::user(); // Lấy thông tin người dùng đã đăng nhập
-
+        // Lưu thông tin vào Session
+        Session::put('user_id', $user->id);               // Lưu ID người dùng
+        Session::put('user_name', $user->fullname);       // Lưu tên đầy đủ
+        Session::put('user_image', $user->profile_picture); // Lưu ảnh đại diện
+        Session::put('user_role', $user->role);           // Lưu vai trò người dùng
         // Kiểm tra vai trò
         if ($user->role == '0') {
             return redirect()->route('movie.index'); // Chuyển hướng đến trang quản trị
         } else {
-            return redirect()->route('login')->with('err', 'Tài khoản hoặc mật khẩu không hợp lệ');
+            return redirect()->route('login')->with('err', 'Bạn không có quyền truy cập!');
         }
+    } else {
+        // Sai thông tin đăng nhập
+        return redirect()->route('login')->with('err', 'Tài khoản hoặc mật khẩu không hợp lệ');
     }
-
-    // Trường hợp đăng nhập thất bại
-    return redirect()->route('login')
-        ->withInput($request->except('password'))
-        ->with('err', 'Sai tài khoản hoặc mật khẩu');
 }
 
     public function logout()
     {
         Auth::logout(); // Hủy phiên đăng nhập
+        Session::flush();
         return redirect()->route('login');
     }
 

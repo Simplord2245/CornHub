@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="{{asset('//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
   <link rel="stylesheet" href="{{asset('bootstrap/css/main_style.css')}}">
+  <link rel="icon" type="image/png" href="{{ asset('https://juststickers.in/wp-content/uploads/2017/12/corn-hun.png') }}">
   <!-- CSS Select2 -->
 {{-- <link href="{{asset('https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css')}}" rel="stylesheet" /> --}}
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <header class="main-header">
     <a href="#" class="logo">
       <span class="logo-mini"><b>C</b>orn</span>
@@ -46,7 +46,11 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="" class="img-circle" alt="User Image">
+                        @if(Session::has('user_image') && Session::get('user_image') !== null)
+                        <img src="{{ asset('img/' . Session::get('user_image')) }}" class="img-circle" alt="User Image">
+                    @else
+                    <img src="https://via.placeholder.com/150" class="img-circle" alt="User Image">
+                    @endif
                       </div>
                       <h4>
                         Support Team
@@ -62,16 +66,23 @@
           </li>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="" class="user-image" alt="User Image">
+              @if(Session::has('user_image') && Session::get('user_image') !== null)
+              <img src="{{ asset('img/' . Session::get('user_image')) }}" class="user-image" alt="User Image">
+          @else
+          <img src="https://via.placeholder.com/150" class="user-image" alt="User Image">
+          @endif
               <span class="hidden-xs"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="" class="img-circle" alt="User Image">
-
+                @if(Session::has('user_image') && Session::get('user_image') !== null)
+                        <img src="{{ asset('img/' . Session::get('user_image')) }}" class="img-circle" alt="User Image">
+                    @else
+                    <img src="https://via.placeholder.com/150" class="img-circle" alt="User Image">
+                    @endif
                 <p>
                    - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <small>Member since Nov. 2024</small>
                 </p>
               </li>
               <li class="user-body">
@@ -106,7 +117,11 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="" class="img-circle" alt="User Image">
+          @if(Session::has('user_image') && Session::get('user_image') !== null)
+                        <img src="{{ asset('img/' . Session::get('user_image')) }}" class="img-circle" alt="User Image">
+                    @else
+                    <img src="https://via.placeholder.com/150" class="img-circle" alt="User Image">
+                    @endif
         </div>
         <div class="pull-left info">
           <p></p>
@@ -167,7 +182,7 @@
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
     </div>
-    <strong>Copyright &copy; 2014-2015 <a href="#">CornHub</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2024 <a href="#">CornHub</a>.</strong> All rights reserved.
   </footer>
 </div>
 

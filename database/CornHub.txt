@@ -48,6 +48,7 @@ CREATE TABLE Users (
     full_name VARCHAR(255),
     profile_picture VARCHAR(255),
     role TINYINT DEFAULT 1,
+    remember_token VARCHAR(100),
     date_joined DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE Ratings (
@@ -287,11 +288,11 @@ INSERT INTO Movies_Genres (movie_id, genre_id) VALUES
 (12, 1), (12, 16), (12, 8), (12, 10);
 INSERT INTO Users (username, email, password, full_name, profile_picture, role)
 VALUES
-('Duynguyen2245', '2245n123@gmail.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Mỵ Duy Nguyên', 'https://example.com/naruto-profile.jpg', 0),
-('Nghia137', 'nghia137@gmail.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Bùi Trọng Nghĩa', 'https://example.com/naruto-profile.jpg', 0),
-('narutoFan', 'naruto@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Naruto Uzumaki', 'https://example.com/naruto-profile.jpg', 1),
-('aotFan', 'aot@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Eren Jaeger', 'https://example.com/aot-profile.jpg', 1),
-('onePieceFan', 'onepiece@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Monkey D. Luffy', 'https://example.com/onepiece-profile.jpg', 1);
+('Duynguyen2245', '2245n123@gmail.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Mỵ Duy Nguyên', 'duynguyen.jpg', 0),
+('Nghia137', 'nghia137@gmail.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Bùi Trọng Nghĩa', 'nghiabui.jpg', 0),
+('narutoFan', 'naruto@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Naruto Uzumaki', 'ava1.jpg', 1),
+('aotFan', 'aot@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Eren Jaeger', 'ava2.jpg', 1),
+('onePieceFan', 'onepiece@anime.com', '$2y$12$4Sx/qagiYWaFx67llP.hrOJB4mkUnrHaXn7jZJXLHJaAKk6EsZ0FW', 'Monkey D. Luffy', 'ava3.jpg', 1);
 INSERT INTO Ratings (user_id, submovie_id, rating)
 VALUES
 (1, 1, 9), (2, 2, 8), (3, 3, 10), (1, 4, 7), (2, 5, 10),

@@ -51,7 +51,7 @@ Route::prefix('genre')->group(function(){
 Route::get('/login', [UsersController::class, 'login'])->name('login');
 Route::get('/create', [UsersController::class, 'create'])->name('create');
 Route::post('/register', [UsersController::class, 'register'])->name('register');
-Route::post('/logon', [UsersController::class, 'logon'])->name('logon');
+Route::post('/logon', [UsersController::class, 'logon'])->middleware('web')->name('logon');
 
 // Bảo vệ bởi authentication => phải đăng nhập mới có quyền truy cập
 Route::middleware('auth')->prefix('/admin')->group(function(){    
