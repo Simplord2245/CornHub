@@ -35,8 +35,12 @@ Route::prefix('movie')->group(function () {
         Route::get('detail/{id}', [SubMoviesController::class, 'detail'])->name('submovie.detail');
         Route::get('watch/{id}', [SubMoviesController::class, 'watch'])->name('submovie.watch');
         Route::get('delete/{id}', [SubMoviesController::class, 'delete'])->name('submovie.delete');
-        Route::get('episodes/{id}/{name}', [EpisodesController::class, 'index'])->name('episodes.index');
-        Route::get('episodes/delete/{id}', [EpisodesController::class, 'delete'])->name('episodes.delete');
+            Route::prefix('episodes')->group(function () {
+            Route::get('list/{id}/{name}', [EpisodesController::class, 'index'])->name('episodes.index');
+            Route::get('delete/{id}', [EpisodesController::class, 'delete'])->name('episodes.delete');
+            Route::get('create/{submovie_id}/{id?}', [EpisodesController::class, 'create'])->name('episodes.create');
+            Route::post('store/{submovie_id}/{id?}', [EpisodesController::class, 'store'])->name('episodes.store');
+        });
     });
 });
 Route::prefix('user')->group(function(){
@@ -44,6 +48,8 @@ Route::prefix('user')->group(function(){
 });
 Route::prefix('genre')->group(function(){
     Route::get('/', [GenresController::class, 'index'])->name('genre.index');
+    Route::get('create/{id?}', [GenresController::class, 'create'])->name('genre.create');
+    Route::post('store/{id?}', [GenresController::class, 'store'])->name('genre.store');
     Route::get('delete/{id}', [GenresController::class, 'delete'])->name('genre.delete');
 });
 

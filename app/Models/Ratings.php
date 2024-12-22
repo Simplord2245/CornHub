@@ -11,4 +11,5 @@ class Ratings extends Model
     protected $table = 'Ratings';
     protected $fillable = ['user_id', 'movie_id', 'comment'];
     protected $primaryKey = 'comment_id';
+    public $timestamps = false;
 }

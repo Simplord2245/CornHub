@@ -11,4 +11,5 @@ class Watch_History extends Model
     protected $table = 'Watch_History';
     protected $fillable = ['user_id', 'movie_id'];
     protected $primaryKey = 'watch_id';
+    public $timestamps = false;
 }

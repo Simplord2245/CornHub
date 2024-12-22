@@ -11,7 +11,8 @@ class Genres extends Model
     protected $table = 'genres';
     protected $fillable = ['genre_id', 'name'];
     protected $primaryKey = 'genre_id';
-
+    public $timestamps = false;
+    
     public function Movies()
     {
         return $this->belongsToMany(Movies::class, 'Movies_Genres', 'genre_id', 'movie_id');

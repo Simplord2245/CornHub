@@ -7,6 +7,7 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách thể loại</h1>
+            <a id="create-btn" href="{{route('genre.create')}}" type="submit" class="btn btn-primary">Thêm thể loại</a>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -21,7 +22,7 @@
                         <td>{{ $genre->name }}</td>
                         <td>{{ $genre->movies_count }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-sm">Sửa</a>
+                            <a href="{{route('genre.create', $genre->genre_id)}}" class="btn btn-primary btn-sm">Sửa</a>
                         </td>
                         <td>
                             <a href="{{route('genre.delete', $genre->genre_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xoá {{ $genre->name }}?');" class="btn btn-danger btn-sm">Xoá</a>

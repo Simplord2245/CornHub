@@ -11,6 +11,7 @@ class Episodes extends Model
     protected $table = 'Episodes';
     protected $fillable = ['submovie_id, episode_number, duration, url'];
     protected $primaryKey = 'episode_id';
+    public $timestamps = false;
 
     public function SubMovie(){
         return $this->belongsTo(SubMovies::class, 'submovie_id');
