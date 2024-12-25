@@ -7,6 +7,10 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách người dùng</h1>
+            <form class="search-form" action="{{ route('user.index') }}" method="GET">
+                <input class="search-input" type="text" name="search" placeholder="Tìm kiếm người dùng" value="{{ request('search') }}">
+                <button class="search-button" type="submit">Tìm kiếm</button>
+            </form> 
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>

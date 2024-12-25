@@ -52,5 +52,20 @@ class User extends Model implements Authenticatable
     {
         return 'remember_token'; // Tên cột cho remember_token
     }
+    public function Notifications(){
+        return $this->hasMany(Notifications::class, 'user_id');
+    }
+    public function commentedSubmovies()
+    {
+        return $this->belongsToMany(Submovies::class, 'comments', 'user_id', 'submovie_id')
+                    ->withPivot('comment');
+    }
+
+    // Mối quan hệ với bảng ratings
+    public function ratedSubmovies()
+    {
+        return $this->belongsToMany(Submovies::class, 'ratings', 'user_id', 'submovie_id')
+                    ->withPivot('rating');
+    }
 }
 ?>

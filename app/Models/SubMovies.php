@@ -19,4 +19,15 @@ class SubMovies extends Model
     public function Episodes(){
         return $this->hasMany(Episodes::class, 'submovie_id');
     }
+    public function usersWhoCommented()
+    {
+        return $this->belongsToMany(User::class, 'comments', 'submovie_id', 'user_id')
+                    ->withPivot('comment');
+    }
+
+    public function usersWhoRated()
+    {
+        return $this->belongsToMany(User::class, 'ratings', 'submovie_id', 'user_id')
+                    ->withPivot('rating');
+    }
 }

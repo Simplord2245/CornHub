@@ -9,10 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+    $query = $request->input('search');
+    if ($query) {
+        $movies = Movies::with('Genres')
+            ->where('title', 'like', '%' . $query . '%')
+            ->paginate(12);
+    } else {
         $movies = Movies::with('Genres')->paginate(12);
-        return view('movie', compact('movies'));
     }
+    return view('movie', compact('movies', 'query'));
+}
     public function create($id = null){
         $genre = Genres::all();
         $movie = $id == null ? new Movies : Movies::with('Genres')->find($id);

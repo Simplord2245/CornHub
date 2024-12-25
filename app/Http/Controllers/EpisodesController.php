@@ -8,12 +8,26 @@ use Illuminate\Http\Request;
 
 class EpisodesController extends Controller
 {
-    public function index($id, $name){
-        $submovie_name = $name;
-        $episo = Episodes::where('submovie_id', $id)->first();
-        $episodes = Episodes::where('submovie_id', $id)->paginate(13);
-        return view('episodes', compact('episo', 'episodes', 'submovie_name'));
+    public function index(Request $request, $id, $name)
+{
+    $submovie_name = $name; // Lấy tên phụ đề phim
+    $query = $request->input('search'); // Lấy từ khóa tìm kiếm từ request
+
+    // Lấy tập đầu tiên (nếu cần hiển thị thông tin riêng cho tập đầu)
+    $episo = Episodes::with('Submovie')->where('submovie_id', $id)->first();
+
+    // Kiểm tra nếu có từ khóa tìm kiếm
+    if ($query) {
+        $episodes = Episodes::where('submovie_id', $id)
+            ->where('episode_number', 'like', '%' . $query . '%') // Tìm kiếm theo tên tập phim
+            ->paginate(12);
+    } else {
+        // Hiển thị danh sách mặc định nếu không có tìm kiếm
+        $episodes = Episodes::where('submovie_id', $id)->paginate(12);
     }
+
+    return view('episodes', compact('episo', 'episodes', 'submovie_name', 'query'));
+}
     public function create($submovie_id, $id = null){
         $submovie = SubMovies::find($submovie_id)->first();
         $episode = $id == null ? new Episodes : Episodes::with('SubMovie')->find($id);

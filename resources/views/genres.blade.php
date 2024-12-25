@@ -7,6 +7,10 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách thể loại</h1>
+            <form class="search-form" action="{{ route('genre.index') }}" method="GET">
+                <input class="search-input" type="text" name="search" placeholder="Tìm kiếm thể loại" value="{{ request('search') }}">
+                <button class="search-button" type="submit">Tìm kiếm</button>
+            </form> 
             <a id="create-btn" href="{{route('genre.create')}}" type="submit" class="btn btn-primary">Thêm thể loại</a>
             <table class="table table-striped table-hover">
                 <thead>

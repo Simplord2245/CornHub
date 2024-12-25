@@ -7,10 +7,28 @@ use Illuminate\Http\Request;
 
 class GenresController extends Controller
 {
-    public function index(){
-        $genres = Genres::with('Movies')->withCount('Movies')->orderBy('movies_count', 'desc')->paginate(13);
-        return view('genres', compact('genres'));
+    public function index(Request $request)
+{
+    $query = $request->input('search'); // Lấy từ khóa tìm kiếm từ request
+
+    // Kiểm tra nếu có từ khóa tìm kiếm
+    if ($query) {
+        $genres = Genres::with('Movies')
+            ->withCount('Movies')
+            ->where('name', 'like', '%' . $query . '%') // Tìm kiếm theo tên thể loại
+            ->orderBy('movies_count', 'desc')
+            ->paginate(12);
+    } else {
+        // Hiển thị danh sách mặc định nếu không có tìm kiếm
+        $genres = Genres::with('Movies')
+            ->withCount('Movies')
+            ->orderBy('movies_count', 'desc')
+            ->paginate(12);
     }
+
+    return view('genres', compact('genres', 'query'));
+}
+
     public function create($id = null){
         $genre = $id == null ? new Genres : Genres::find($id);
         return view('genre_create_update', compact('genre'));

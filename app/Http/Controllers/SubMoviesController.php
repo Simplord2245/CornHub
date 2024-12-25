@@ -9,12 +9,34 @@ use Illuminate\Support\Str;
 
 class SubMoviesController extends Controller
 {
-    public function index($id, $name){
-        $movie_name = $name;
-        $submoi = SubMovies::where('movie_id', $id)->first();
-        $submovies = SubMovies::with('Episodes')->withCount('Episodes')->where('movie_id', $id)->paginate(6);
-        return view('submovies', compact('submovies', 'movie_name', 'submoi'));
+    public function index(Request $request, $id, $name)
+{
+    $movie_name = $name;
+    $query = $request->input('search'); // Lấy từ khóa tìm kiếm
+
+    // Lấy tập phim đầu tiên
+    $submoi = SubMovies::with('Movie')->where('movie_id', $id)->first();
+    if (!$submoi) {
+        return redirect()->route('movies.index')->with('error', 'Không tìm thấy thông tin phim.');
     }
+
+    // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm
+    if ($query) {
+        $submovies = SubMovies::with(['Episodes'])
+            ->withCount('Episodes')
+            ->where('movie_id', $id)
+            ->where('submovie_title', 'like', '%' . $query . '%') // Tìm kiếm theo cột "name"
+            ->paginate(5);
+    } else {
+        // Hiển thị danh sách mặc định nếu không tìm kiếm
+        $submovies = SubMovies::with(['Episodes'])
+            ->withCount('Episodes')
+            ->where('movie_id', $id)
+            ->paginate(5);
+    }
+
+    return view('submovies', compact('submovies', 'movie_name', 'submoi', 'query'));
+}
     public function create($movie_id, $id = null){
         $movie = Movies::find($movie_id);
         $submovie = $id == null ? new SubMovies : SubMovies::find($id);

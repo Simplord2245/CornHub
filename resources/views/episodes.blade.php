@@ -7,6 +7,10 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách tập phim của {{$submovie_name}} </h1>
+            <form class="search-form" action="{{ route('episodes.index', [ 'id' => $episo->submovie_id, 'name' => $episo->SubMovie->submovie_title ]) }}" method="GET">
+                <input class="search-input" type="text" name="search" placeholder="Tìm kiếm tập phim" value="{{ request('search') }}">
+                <button class="search-button" type="submit">Tìm kiếm</button>
+            </form> 
             <a id="create-btn" href="{{route('episodes.create', ['submovie_id' => $episo->submovie_id, 'id' => ''])}}" type="submit" class="btn btn-primary">Thêm tập mới</a>
             <table class="table table-striped table-hover">
                 <thead>

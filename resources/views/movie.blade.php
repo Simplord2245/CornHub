@@ -7,6 +7,10 @@
     <div class="box-body">
         <div class="container">
             <h1>Danh sách phim</h1>
+            <form class="search-form" action="{{ route('movie.index') }}" method="GET">
+                <input class="search-input" type="text" name="search" placeholder="Tìm kiếm tên phim" value="{{ request('search') }}">
+                <button class="search-button" type="submit">Tìm kiếm</button>
+            </form>            
             <a id="create-btn" href="{{route('movie.create')}}" type="submit" class="btn btn-primary">Thêm phim</a>
             <table class="table table-striped table-hover">
                 <thead>

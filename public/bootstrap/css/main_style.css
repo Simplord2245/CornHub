@@ -159,8 +159,9 @@ ul#episodeList li.active {
 }
 
 .box-body {
+    height: 1000px;
     background-color: #fff;
-    padding: 30px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -290,4 +291,63 @@ ul#episodeList li.active {
 .genre-item {
     display: flex;
     align-items: center;
+}
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+/* Input tìm kiếm */
+.search-input {
+    width: 300px;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Khi focus vào ô input */
+.search-input:focus {
+    border-color: #007bff; /* Màu xanh lam nhạt */
+}
+
+/* Nút tìm kiếm */
+.search-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-left: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hiệu ứng hover cho nút */
+.search-button:hover {
+    background-color: #0056b3; /* Màu xanh đậm hơn */
+}
+/* Thông báo thành công */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #c3e6cb;
+}
+
+/* Thông báo lỗi */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
 }

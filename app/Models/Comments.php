@@ -9,8 +9,6 @@ class Comments extends Model
 {
     use HasFactory;
     protected $table = 'Comments';
-    protected $fillable = ['user_id', 'movie_id', 'rating'];
-    protected $primaryKey = 'comment_id';
+    protected $fillable = ['user_id', 'submovie_id', 'comment', 'date_commented'];
     public $timestamps = false;
-    
 }

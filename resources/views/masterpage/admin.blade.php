@@ -155,7 +155,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Quản người dùng</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-th"></i> <span>Quản lý người dùng</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> Danh sách người dùng</a></li>
@@ -175,6 +175,18 @@
   </aside>
   <div class="main-wrapper">
   <div class="content-wrapper">
+    @if (session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+
+    <!-- Hiển thị thông báo lỗi -->
+    @if (session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
     @yield('content')
   </div>
   </div>
