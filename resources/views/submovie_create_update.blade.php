@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <label for="">Ảnh</label>
                     <div class="movie-image">
-                        <img src="{{ asset('storage/img/' . $submovie->image) }}" alt="" height="180px" width="130px">
+                        <img src="{{ asset('img/' . $submovie->image) }}" alt="" height="180px" width="130px">
                     </div>
                     <input type="file" class="form-control" name="image" id="" placeholder="Thêm ảnh" value="{{ old('image', $submovie->image) }}">
                     @if($errors->has('image'))

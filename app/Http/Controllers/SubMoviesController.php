@@ -80,15 +80,20 @@ class SubMoviesController extends Controller
 
     // Xử lý upload ảnh
     $filename = $request->submovie_title;
-        $file = $request->file('image');
+    $file = $request->file('image');
+    if ($file) {
+        // Lấy phần mở rộng của file (extension)
         $filetype = $file->getClientOriginalExtension();
         
-        $new_filename = Str::replace(' ', '_', Str::lower($filename), false);
-        $new_filename .= '.' . $filetype;
-
-        $path =  $file->storeAs('img', $new_filename, 'public');
-
+        // Tạo tên file mới (lowercase, thay thế khoảng trắng bằng dấu gạch dưới)
+        $new_filename = Str::slug($filename) . '.' . $filetype;
+    
+        // Lưu file vào thư mục 'public/img' (cấu hình trong filesystems.php)
+        $path = $file->storeAs('img', $new_filename, 'public');
+        $path = $request->file('image')->move(public_path('img'), $new_filename);
+        // Lưu tên file vào thuộc tính image của model
         $submovie->image = $new_filename;
+    } 
     // Lưu vào cơ sở dữ liệu
     $submovie->save();
 
@@ -108,6 +113,9 @@ class SubMoviesController extends Controller
         $post = SubMovies::with('Movie')->where('submovie_id', $id)->first();
         if ($post->image && file_exists(public_path('storage/img/' . $post->image))) {
             unlink(public_path('storage/img/' . $post->image));
+        }
+        if($post->image && file_exists(public_path('img/' . $post->image))){
+            unlink(public_path('img/' . $post->image));
         }
         $post->delete();
         return redirect()->route('submovie.index', [

@@ -30,7 +30,7 @@
                     @foreach($submovies as $submovie)
                     <tr>
                         <td><a href="{{route('submovie.detail', $submovie->submovie_id)}}">{{ $submovie->submovie_title }}</a></td>                        
-                        <td><img src="{{asset('storage/img/'. $submovie->image)}}" alt="" width="60px" height="80px"></td>                        
+                        <td><img src="{{asset('img/'. $submovie->image)}}" alt="" width="60px" height="80px"></td>                        
                         <td style="text-align: center">{{ $submovie->release_year }}</td>
                         <td>{{ $submovie->trailer_url }}</td>
                         <td style="text-align: center"><a href="{{route('episodes.index', [ 'id' => $submovie->submovie_id, 'name' => $submovie->submovie_title ])}}">{{ $submovie->episodes_count }}</a></td>
